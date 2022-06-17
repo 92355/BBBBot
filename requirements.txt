@@ -1,0 +1,3 @@
+Discord.py
+Asyncio
+openpyxl==3.0.9
