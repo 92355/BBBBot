@@ -191,7 +191,7 @@ async def on_message(message):
 
         if pick == str(reaction):
             await color.edit(embed=discord.Embed(title="🔖컬러", description=str(reaction)+"딜러가 고른 걸 맞췄습니다 💵"+str(3*int(insert[1]))+"획득하였습니다", color=0xF6CEEC))
-            money[id.index(ID)] += 7777*int(insert[1])
+            money[id.index(ID)] += 777*int(insert[1])
         else:
             await color.edit(embed=discord.Embed(title="🔖컬러", description=str(pick)+"딜러가 고른 걸 맞추지 못 했습니다", color=0xF6CEEC))
             money[id.index(ID)] += 0*int(insert[1])
