@@ -118,47 +118,48 @@ async def on_message(message):
             await message.channel.send("숫자만 입력해 주세요")
             raise ValueError
         elif not ID in id or money[id.index(ID)] - int(insert[1]) < 0:
-            await message.channel.send("보유금액 초과. ")
+            await message.channel.send("오류가 발생했습니다")
             raise ValueError
         money[id.index(ID)] -= int(insert[1])
-
         
 
-        inslot, check =[], []
-        icon = [' 💛 ',' 💚 ',' 💙 ',' 💜' ,' 🧡 ',' ❤️ ',' 🤍 ']
-        
-        slotmachin=await message.channel.send("결과 : ?")
-        
+
+        inslot = []
+        icon =['🍋','🍒','🥥','🍑','🍇','💎','⭐️']
+        embed=discord.Embed(title='🎰슬롯머신 | 베팅 : 💵'+str(insert[1]), description='', color=0xF5DA81)
+        embed.add_field(name='❔  |  ❔  |  ❔', value='결과 : ❔', inline=False)
+        slotmachine = await message.channel.send(embed=embed)
+
         for i in range(3):
-            await asyncio.sleep(0.3)
+            await asyncio.sleep(0.2)
             roll = random.sample(icon, 3)
-            await slotmachin.edit(content=roll)
+            slot_embed=discord.Embed(title='🎰슬롯머신 | 베팅 : 💵'+str(insert[1]), description='', color=0xF5DA81)
+            slot_embed.add_field(name=str(roll[0])+' | '+str(roll[1])+' | '+str(roll[2]), value='결과 : ❔', inline=False)
+            await slotmachine.edit(embed=slot_embed)
             inslot.append(random.choice(icon))
-       
-        for i in range(0, len(icon)):
-            if inslot.count(icon[i]) == 3:
-                check = [str(icon[i])+" 트리블", 5]
-                break
-            elif inslot.count(icon[i]) == 2:
-                check = [str(icon[i]) + " 더블", 3]
-                break
-            else:
-                continue
 
-        slotembed = discord.Embed(title="슬롯머신", description="💛 💚 💙 💜 🧡 ❤️ 🤍", color=0xFFFFFF)
-        slotembed.add_field(name='당신, 트리플 뜨면 장기백 볼거야', value='장인의 기운이 당신의 곁에')
-
-        if len(check) == 0:
-            
-            slotembed.add_field(name="결과  ", value = str(inslot)+'\n'+" 꽝! 돈을 잃었습니다!!", inline=False)
-            slotembed.add_field(name="잔액 ", value=str(money[id.index(ID)])+"원", inline=False)
-            await message.channel.send(embed=slotembed)
+        if inslot.count('<:7seven:919822960569745468>') == 3:
+            result = ['JACKPOT! 베팅의 777배를 획득하셨습니다!', 777]
+        elif inslot.count('💎') == 3:
+            result = ['DIAMOND! 베팅의 100배를 획득하셨습니다!', 100]
+        elif inslot.count('🍇') == 3 or inslot.count('🍑') == 3 or inslot.count('🥥') == 3 or inslot.count('🍒') == 3 or inslot.count('🍋') == 3:
+            result = ['TRIPLE! 베팅의 10배를 획득하셨습니다!', 10]
+        elif inslot.count('<:7seven:919822960569745468>') == 2 or inslot.count('💎') == 2:
+            result = ['DOUBLE! 베팅의 22배를 획득하셨습니다!', 22]
+        elif inslot.count('🍇') == 2 or inslot.count('🍑') == 2 or inslot.count('🥥') == 2 or inslot.count('🍒') == 2 or inslot.count('🍋') == 2:
+            result = ['DOUBLE! 베팅의 4배를 획득하셨습니다!', 4]
         else:
-            slotembed.add_field(name="결과  ", value = str(inslot)+ '\n '+ check[0], inline=False)
-            money[id.index(ID)] += int(check[1])*int(insert[1])
-            slotembed.add_field(name="잔액 ", value=str(money[id.index(ID)])+"원", inline=False)
-            
-            await message.channel.send(embed=slotembed)
+            result = ['돈을 잃었습니다...', 0]
+
+        result_embed=discord.Embed(title='🎰슬롯머신 | 베팅 : 💵'+str(insert[1]), description='', color=0xF5DA81)
+        result_embed.add_field(name=str(inslot[0])+' | '+str(inslot[1])+' | '+str(inslot[2]), value='결과 : '+str(result[0]), inline=False)
+        await slotmachine.edit(embed=result_embed)
+        money[id.index(ID)] += int(result[1])*int(insert[1])
+
+        f = open('test.txt', 'w')
+        for i in range(0,len(id),1):
+            f.write(str(id[i])+","+str(money[i])+","+str(timed[i])+"\n")
+        f.close()
                        
 
     if message.content.startswith("컬러"):
