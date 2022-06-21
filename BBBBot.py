@@ -19,11 +19,11 @@ client = commands.Bot(command_prefix = '-')
 id, money, timed = [], [], []
 
 try:
-    f = open('test.txt', 'r')
+    f = open('money.txt', 'r')
 except:
-    f = open('test.txt', 'w')
+    f = open('money.txt', 'w')
     f.close()
-    f = open('test.txt', 'r')
+    f = open('money.txt', 'r')
 for line in f.readlines(): 
     data = line.split(",")
     id.append(data[0])
@@ -78,7 +78,7 @@ async def on_message(message):
         await message.channel.send(embed = giveembed)
 
 
-        f = open("test.txt", "w")
+        f = open("money.txt", "w")
         for i in range(0,len(id),1):
             f.write(str(id[i])+","+str(money[i])+","+str(timed[i])+"\n")
         f.close()
@@ -161,7 +161,7 @@ async def on_message(message):
         await slotmachine.edit(embed=result_embed)
         money[id.index(ID)] += int(result[1])*int(insert[1])
 
-        f = open('test.txt', 'w')
+        f = open('money.txt', 'w')
         for i in range(0,len(id),1):
             f.write(str(id[i])+","+str(money[i])+","+str(timed[i])+"\n")
         f.close()
@@ -203,7 +203,7 @@ async def on_message(message):
             money[id.index(ID)] += 0*int(insert[1])
 
 
-        f = open("test.txt", "w")
+        f = open("money.txt", "w")
         for i in range(0, len(id), 1):
             f.write(str(id[i]) + ","+str(money[i])+str(timed[i])+"\n")
         f.close()
