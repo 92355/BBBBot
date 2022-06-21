@@ -130,7 +130,7 @@ async def on_message(message):
 
 
         inslot = []
-        icon =[' 💛 ',' 💚 ',' 💙 ',' 💜' ,' 🧡 ',' ❤️ ',' 🌟🌱⭐️ ']
+        icon =[' 💛 ',' 💚 ',' 💙 ',' 💜' ,' 🧡 ',' ❤️ ',' 🌟 ']
         embed=discord.Embed(title='🎰슬롯머신 | 베팅 : 💵'+str(insert[1]), description='', color=0xF5DA81)
         embed.add_field(name='❔  |  ❔  |  ❔', value='결과 : ❔', inline=False)
         slotmachine = await message.channel.send(embed=embed)
