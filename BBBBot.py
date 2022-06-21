@@ -62,7 +62,7 @@ async def on_message(message):
         give = random.randint(1, 1000)*random.randint(1, 100)
         if ID in id:
             if TIME - timed[id.index(ID)] < 10:
-                await message.send("좀더 기다려 주세요")
+                await message.channel.send("좀더 기다려 주세요")
                 raise ValueError
             elif TIME - timed[id.index(ID)] >= 10:
                 timed[id.index(ID)] = int(time.time())
