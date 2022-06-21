@@ -130,28 +130,28 @@ async def on_message(message):
 
 
         inslot = []
-        icon =[' 💛 ',' 💚 ',' 💜' ,' 🧡 ',' ❤️ ',' 🌱 ',' 🌟 ']
+        icon =['🍋','🍒','🥥','🍑','🍇','💎','⭐️']
         embed=discord.Embed(title='🎰슬롯머신 | 베팅 : 💵'+str(insert[1]), description='', color=0xF5DA81)
         embed.add_field(name='❔  |  ❔  |  ❔', value='결과 : ❔', inline=False)
         slotmachine = await message.channel.send(embed=embed)
 
         for i in range(3):
-            await asyncio.sleep(0.4)
+            await asyncio.sleep(0.2)
             roll = random.sample(icon, 3)
             slot_embed=discord.Embed(title='🎰슬롯머신 | 베팅 : 💵'+str(insert[1]), description='', color=0xF5DA81)
             slot_embed.add_field(name=str(roll[0])+' | '+str(roll[1])+' | '+str(roll[2]), value='결과 : ❔', inline=False)
             await slotmachine.edit(embed=slot_embed)
             inslot.append(random.choice(icon))
 
-        if inslot.count('🌟') == 3:
+        if inslot.count('⭐️') == 3:
             result = ['JACKPOT! 베팅의 777배를 획득하셨습니다!', 777]
-        elif inslot.count('🌱') == 3:
+        elif inslot.count('💎') == 3:
             result = ['DIAMOND! 베팅의 100배를 획득하셨습니다!', 100]
-        elif inslot.count('💚') == 3 or inslot.count('💛') == 3 or inslot.count('💜') == 3 or inslot.count('🧡') == 3 or inslot.count('❤️') == 3:
+        elif inslot.count('🍇') == 3 or inslot.count('🍑') == 3 or inslot.count('🥥') == 3 or inslot.count('🍒') == 3 or inslot.count('🍋') == 3:
             result = ['TRIPLE! 베팅의 10배를 획득하셨습니다!', 10]
-        elif inslot.count('🌟') == 2 or inslot.count('🌱') == 2:
+        elif inslot.count('⭐️') == 2 or inslot.count('💎') == 2:
             result = ['DOUBLE! 베팅의 22배를 획득하셨습니다!', 22]
-        elif inslot.count('💚') == 2 or inslot.count('💛') == 2 or inslot.count('💜') == 2 or inslot.count('🧡') == 2 or inslot.count('❤️') == 2:
+        elif inslot.count('🍇') == 2 or inslot.count('🍑') == 2 or inslot.count('🥥') == 2 or inslot.count('🍒') == 2 or inslot.count('🍋') == 2:
             result = ['DOUBLE! 베팅의 4배를 획득하셨습니다!', 4]
         else:
             result = ['돈을 잃었습니다...', 0]
@@ -160,7 +160,7 @@ async def on_message(message):
         result_embed.add_field(name=str(inslot[0])+' | '+str(inslot[1])+' | '+str(inslot[2]), value='결과 : '+str(result[0]), inline=False)
         await slotmachine.edit(embed=result_embed)
         money[id.index(ID)] += int(result[1])*int(insert[1])
-
+        
         f = open('money.txt', 'w')
         for i in range(0,len(id),1):
             f.write(str(id[i])+","+str(money[i])+","+str(timed[i])+"\n")
