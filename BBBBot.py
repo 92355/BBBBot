@@ -10,6 +10,9 @@ import time
 from discord import channel
 
 
+#TOKEN ="OTc2Njc2MTE3MDEwMzUwMTUy.G567YH.JXN8vFCEtFdKS0SZMc9OmgweEPjGFlbwbZbIr4"
+
+#client = discord.Client()
 
 client = commands.Bot(command_prefix = '-')
 
@@ -59,7 +62,7 @@ async def on_message(message):
         give = random.randint(1, 1000)*random.randint(1, 100)
         if ID in id:
             if TIME - timed[id.index(ID)] < 10:
-                await message.channel.send("좀더 기다려 주세요")
+                await message.send("좀더 기다려 주세요")
                 raise ValueError
             elif TIME - timed[id.index(ID)] >= 10:
                 timed[id.index(ID)] = int(time.time())
@@ -79,7 +82,6 @@ async def on_message(message):
         for i in range(0,len(id),1):
             f.write(str(id[i])+","+str(money[i])+","+str(timed[i])+"\n")
         f.close()
-
 
     if message.content == "내돈":
         ID = str(message.author.id)
@@ -207,5 +209,5 @@ async def on_message(message):
         f.close()
    
     
-
+#client.run(TOKEN)
 client.run(os.environ['token'])
