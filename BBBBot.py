@@ -29,12 +29,6 @@ for line in f.readlines():
 f.close()
 
 
-
-@client.event
-async def on_ready():
-    print("클라이언트에 접속 중입니다....!")
-
-
 @client.event
 async def on_message(message):
     if message.content == ("빙빙베베 온!"):
@@ -70,14 +64,17 @@ async def on_message(message):
             elif TIME - timed[id.index(ID)] >= 10:
                 timed[id.index(ID)] = int(time.time())
                 money[id.index(ID)] += give
-        elif not ID in id:
-            id.append(ID)
-            money.append(give)
-            timed.append(TIME)
+            elif not ID in id:
+                id.append(ID)
+                money.append(give)
+                timed.append(TIME)
         giveembed = discord.Embed(title ="💵", description = str(give)+" 만원 획득!")
         giveembed.add_field(name= message.author.name +" 님의 잔고 :", value="⭐️🌟⭐️")
         giveembed.add_field(name= str(money[id.index(ID)]) +"만원", value="🌟⭐️🌟")
-        await message.send(embed = giveembed)
+        
+        await message.channel.send(embed = giveembed)
+
+
         f = open("test.txt", "w")
         for i in range(0,len(id),1):
             f.write(str(id[i])+","+str(money[i])+","+str(timed[i])+"\n")
@@ -89,9 +86,9 @@ async def on_message(message):
         if ID in id:
             moneyebed = discord.Embed(title = str(money[id.index(ID)])+" 만원", description = message.author.name + " 님의 통장 잔고")
             moneyebed.set_thumbnail(url = message.author.avatar_url)
-            await message.send(embed = moneyebed)
+            await message.channel.send(embed = moneyebed)
         elif not ID in id:
-            await message.send("등록 되지 않은 아이디 입니다. '돈줘'를 입력해보세여")
+            await message.channel.send("등록 되지 않은 아이디 입니다. '돈줘'를 입력해보세여")
             raise ValueError
 
     if message.content == ("돈줭"):
@@ -208,7 +205,6 @@ async def on_message(message):
         for i in range(0, len(id), 1):
             f.write(str(id[i]) + ","+str(money[i])+str(timed[i])+"\n")
         f.close()
-    
    
     
 
