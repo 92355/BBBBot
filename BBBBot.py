@@ -130,7 +130,7 @@ async def on_message(message):
 
 
         inslot = []
-        icon =[' 💛 ',' 💚 ',' 💙 ',' 💜' ,' 🧡 ',' ❤️ ',' 🌟 ']
+        icon =[' 💛 ',' 💚 ',' 💜' ,' 🧡 ',' ❤️ ',' 🌱 ',' 🌟 ']
         embed=discord.Embed(title='🎰슬롯머신 | 베팅 : 💵'+str(insert[1]), description='', color=0xF5DA81)
         embed.add_field(name='❔  |  ❔  |  ❔', value='결과 : ❔', inline=False)
         slotmachine = await message.channel.send(embed=embed)
@@ -143,15 +143,15 @@ async def on_message(message):
             await slotmachine.edit(embed=slot_embed)
             inslot.append(random.choice(icon))
 
-        if inslot.count('<:7seven:919822960569745468>') == 3:
+        if inslot.count('🌟') == 3:
             result = ['JACKPOT! 베팅의 777배를 획득하셨습니다!', 777]
-        elif inslot.count('💎') == 3:
+        elif inslot.count('🌱') == 3:
             result = ['DIAMOND! 베팅의 100배를 획득하셨습니다!', 100]
-        elif inslot.count('🍇') == 3 or inslot.count('🍑') == 3 or inslot.count('🥥') == 3 or inslot.count('🍒') == 3 or inslot.count('🍋') == 3:
+        elif inslot.count('💚') == 3 or inslot.count('💛') == 3 or inslot.count('💜') == 3 or inslot.count('🧡') == 3 or inslot.count('❤️') == 3:
             result = ['TRIPLE! 베팅의 10배를 획득하셨습니다!', 10]
-        elif inslot.count('<:7seven:919822960569745468>') == 2 or inslot.count('💎') == 2:
+        elif inslot.count('<:7seven:919822960569745468>') == 2 or inslot.count('🌱') == 2:
             result = ['DOUBLE! 베팅의 22배를 획득하셨습니다!', 22]
-        elif inslot.count('🍇') == 2 or inslot.count('🍑') == 2 or inslot.count('🥥') == 2 or inslot.count('🍒') == 2 or inslot.count('🍋') == 2:
+        elif inslot.count('💚') == 2 or inslot.count('💛') == 2 or inslot.count('💜') == 2 or inslot.count('🧡') == 2 or inslot.count('❤️') == 2:
             result = ['DOUBLE! 베팅의 4배를 획득하셨습니다!', 4]
         else:
             result = ['돈을 잃었습니다...', 0]
