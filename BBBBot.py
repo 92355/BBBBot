@@ -59,7 +59,7 @@ async def on_message(message):
     if message.content == ("돈줘"):
         ID = str(message.author.id)
         TIME = int(time.time())
-        give = random.randint(1, 1000)*random.randint(1, 10)
+        give = random.randint(1, 100)*random.randint(1, 10)
         if ID in id:
             if TIME - timed[id.index(ID)] < 10:
                 await message.channel.send("좀더 기다려 주세요")
