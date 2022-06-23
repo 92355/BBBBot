@@ -113,6 +113,64 @@ async def on_message(message):
             id.append(ID)
             money.append(give)
 
+    if message.content.startswith("도박"):
+        ID = str(message.author.id)
+        insert = message.content.split()
+        if insert[1] == "올인":
+            ID = str(message.author.id)
+            insert[1] = money[id.index(ID)]
+        elif insert[1] == "ㅇㅇ" :
+            ID = str(message.author.id)
+            insert[1] = money[id.index(ID)]
+        # elif insert[1] == "하프" :
+        #     ID = str(message.author.id)
+        #     insert[1] = money[id.index(ID) // 2 ]
+        # elif insert[1] == "ㅎㅍ" :
+        #     ID = str(message.author.id)
+        #     insert[1] = money[id.index(ID) // 2] 
+        elif insert[1].isdecimal() == False:
+            await message.channel.send("숫자만 입력해 주세요")
+            raise ValueError
+        elif not ID in id or money[id.index(ID)] - int(insert[1]) < 0:
+            await message.channel.send("오류가 발생했습니다")
+            raise ValueError
+        money[id.index(ID)] -= int(insert[1])
+
+
+        inslot, check = [], []
+        icon =['🍋','🍒','🥥','🍑','🍇','💎']
+
+        for i in range(3):
+            roll = random.sample(icon, 3)
+            inslot.append(random.choice(icon))
+        for i in range(0, len(icon)):
+            if inslot.count(icon[i]) == 3:    
+                check = [' 7배', 5]
+                break
+            elif inslot.count(icon[i]) == 2:
+                check = ['3배', 3]
+                break
+            else:
+                continue
+        
+        if len(check) == 0:
+            dobakzembed = discord.Embed(title ="망했어요 ㅜㅜ",  description = " 돈을 잃었습니다 " + "\n\n" + "잔액 : " + str(money[id.index(ID)])+ " 만 원")
+            await message.channel.send(embed = dobakzembed)  
+        else:
+            money[id.index(ID)] += int(check[1])*int(insert[1])
+            dobakzzembed = discord.Embed(title = "🎊도박 성공 🎊 ",  description =  check[0] + "\n\n" + "잔액 : " + str(money[id.index(ID)])+ " 만 원")
+            
+            await message.channel.send(embed = dobakzzembed) 
+            
+            
+            
+
+        f = open('money.txt', 'w')
+        for i in range(0,len(id),1):
+            f.write(str(id[i])+","+str(money[i])+","+str(timed[i])+"\n")
+        f.close()
+
+
     if message.content.startswith("슬롯"):
         ID = str(message.author.id)
         insert = message.content.split()
