@@ -59,7 +59,7 @@ async def on_message(message):
     if message.content == ("돈줘"):
         ID = str(message.author.id)
         TIME = int(time.time())
-        give = random.randint(1, 1000)*random.randint(1, 100)
+        give = random.randint(1, 1000)*random.randint(1, 10)
         if ID in id:
             if TIME - timed[id.index(ID)] < 10:
                 await message.channel.send("좀더 기다려 주세요")
@@ -67,16 +67,14 @@ async def on_message(message):
             elif TIME - timed[id.index(ID)] >= 10:
                 timed[id.index(ID)] = int(time.time())
                 money[id.index(ID)] += give
-            elif not ID in id:
+        elif not ID in id:
                 id.append(ID)
                 money.append(give)
                 timed.append(TIME)
         giveembed = discord.Embed(title ="💵", description = str(give)+" 만원 획득!")
         giveembed.add_field(name= message.author.name +" 님의 잔고 :", value="⭐️🌟⭐️")
         giveembed.add_field(name= str(money[id.index(ID)]) +"만원", value="🌟⭐️🌟")
-        
         await message.channel.send(embed = giveembed)
-
 
         f = open("money.txt", "w")
         for i in range(0,len(id),1):
