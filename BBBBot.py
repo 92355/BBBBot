@@ -10,7 +10,7 @@ import time
 from discord import channel
 
 
-#TOKEN ="OTc2Njc2MTE3MDEwMzUwMTUy.G567YH.JXN8vFCEtFdKS0SZMc9OmgweEPjGFlbwbZbIr4"
+#TOKEN ="##"
 
 #client = discord.Client()
 
